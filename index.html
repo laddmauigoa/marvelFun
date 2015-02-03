@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html ng-app='marvel'>
+	<head>
+		
+	</head>
+
+	<body ng-controller='mainCtrl'>
+
+	<div>
+		{{stuff.name}}
+		<br> 
+		{{stuff.description}}
+
+	</div>
+
+		<img src= 'http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/portrait_incredible.jpg'>
+		<img ng-repeat= 'pic in pics' src= '{{pic.path}}/portrait_incredible.jpg'>
+
+	
+	
+
+
+
+
+
+
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-route.min.js'></script>
+	<script src='apps/app.js'></script>
+	<script src='apps/mainCtrl.js'></script>
+	<script src='apps/mainService.js'></script>
+	</body>
+
+
+</html>
