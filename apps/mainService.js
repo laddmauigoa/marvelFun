@@ -22,20 +22,53 @@ app.service('mainService', function($http, $q) {
 		return dfd.promise;
 	}
 
-	this.getInfo = function(id) {
-		return $http({
+this.getInfo = function(id) {
+	var dfd = $q.defer();
+		 $http({
 			method: 'JSONP',
 			params: {
 				callback: 'JSON_CALLBACK'
 			},
 			url: "http://gateway.marvel.com/v1/public/characters/"+id+"/comics?ts=1&apikey=3a673928d3504e61f05ab1cd31175e74&hash=b9a6b076720c2f3d7c0ee590b8465a02"
 		})
-		// .then(function(res) {
-		// 	console.log('res', res);
+		.then(function(res) {
+			var picPath = res.data.data.results
+			var picArray = [];
+				for(var i = 0; i < picPath.length; i++) {
+					for(var j = 0; j < picPath[i].images.length; j++) {
+						picArray.push(picPath[i].images[j])
+					}
+				
+				}
+						console.log(picArray)
+						dfd.resolve(picArray)
 
-		// }, function(err) {
-		// 	console.log('err', err)
-		// })
+			},
+			 function(err) {
+				console.log('err', err)
+		})
+
+		return dfd.promise
 	}
 	
+	
 })
+
+
+
+
+	// this.getInfo = function(id) {
+	// 	return $http({
+	// 		method: 'JSONP',
+	// 		params: {
+	// 			callback: 'JSON_CALLBACK'
+	// 		},
+	// 		url: "http://gateway.marvel.com/v1/public/characters/"+id+"/comics?ts=1&apikey=3a673928d3504e61f05ab1cd31175e74&hash=b9a6b076720c2f3d7c0ee590b8465a02"
+	// 	 })
+	// 	.then(function(res) {
+	// 		console.log('res', res);
+
+	// 	}, function(err) {
+	// 		console.log('err', err)
+	// 	})
+	// }
